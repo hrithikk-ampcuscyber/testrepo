@@ -1,0 +1,19 @@
+name: app_1
+services:
+  backend:
+    build: .
+
+    labels:
+      platform.enable: "true"
+      platform.host: "app1.localhost"
+      platform.port: "3000"
+
+    networks:
+      default:
+      proxy:
+        aliases:
+          - app_1
+
+networks:
+  proxy:
+    external: true
