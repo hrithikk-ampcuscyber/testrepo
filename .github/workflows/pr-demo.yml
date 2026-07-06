@@ -1,0 +1,72 @@
+name: PR Validation - Demo
+
+on:
+  pull_request:
+    branches:
+      - demo-branch
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: |
+          echo "Build"
+          sleep 2
+
+  lint:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - run: |
+          echo "Lint"
+          sleep 2
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    needs: lint
+
+    steps:
+      - run: |
+          echo "Unit Tests"
+          sleep 2
+
+  integration-tests:
+    runs-on: ubuntu-latest
+    needs: unit-tests
+
+    steps:
+      - run: |
+          echo "Integration Tests"
+          sleep 2
+
+  docker-build:
+    runs-on: ubuntu-latest
+    needs: integration-tests
+
+    steps:
+      - run: |
+          echo "Docker Build"
+          sleep 2
+
+  container-scan:
+    runs-on: ubuntu-latest
+    needs: docker-build
+
+    steps:
+      - run: |
+          echo "Container Scan"
+          sleep 2
+
+  terraform-validate:
+    runs-on: ubuntu-latest
+    needs: container-scan
+
+    steps:
+      - run: |
+          echo "Terraform Validate"
+          sleep 2

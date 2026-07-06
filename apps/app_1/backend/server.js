@@ -5,7 +5,7 @@ const app = express();
 
 app.get("/", (req, res) => {
     res.json({
-        application: "app1",
+        application: "app1-demo",
         hostname: os.hostname(),
         time: new Date().toISOString()
     });

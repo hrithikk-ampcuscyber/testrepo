@@ -1,0 +1,60 @@
+name: PR Validation - Test
+
+on:
+  pull_request:
+    branches:
+      - test-branch
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build
+        run: |
+          echo "Running Build..."
+          sleep 2
+
+  lint:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Run Lint
+        run: |
+          echo "Running Lint..."
+          sleep 2
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    needs: lint
+
+    steps:
+      - name: Execute Unit Tests
+        run: |
+          echo "Running Unit Tests..."
+          sleep 2
+
+  docker-build:
+    runs-on: ubuntu-latest
+    needs: unit-tests
+
+    steps:
+      - name: Build Docker Image
+        run: |
+          echo "Building Docker Image..."
+          sleep 2
+
+  terraform-validate:
+    runs-on: ubuntu-latest
+    needs: docker-build
+
+    steps:
+      - name: Validate Terraform
+        run: |
+          echo "Running Terraform Validate..."
+          sleep 2x`x`
