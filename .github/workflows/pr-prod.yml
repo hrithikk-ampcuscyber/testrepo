@@ -1,0 +1,108 @@
+name: PR Validation - Production
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: |
+          echo "Build"
+          sleep 2
+
+  lint:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - run: |
+          echo "Lint"
+          sleep 2
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    needs: lint
+
+    steps:
+      - run: |
+          echo "Unit Tests"
+          sleep 2
+
+  integration-tests:
+    runs-on: ubuntu-latest
+    needs: unit-tests
+
+    steps:
+      - run: |
+          echo "Integration Tests"
+          sleep 2
+
+  e2e-tests:
+    runs-on: ubuntu-latest
+    needs: integration-tests
+
+    steps:
+      - run: |
+          echo "End-to-End Tests"
+          sleep 2
+
+  security-scan:
+    runs-on: ubuntu-latest
+    needs: e2e-tests
+
+    steps:
+      - run: |
+          echo "Security Scan"
+          sleep 2
+
+  dependency-scan:
+    runs-on: ubuntu-latest
+    needs: security-scan
+
+    steps:
+      - run: |
+          echo "Dependency Scan"
+          sleep 2
+
+  secret-scan:
+    runs-on: ubuntu-latest
+    needs: dependency-scan
+
+    steps:
+      - run: |
+          echo "Secret Scan"
+          sleep 2
+
+  docker-build:
+    runs-on: ubuntu-latest
+    needs: secret-scan
+
+    steps:
+      - run: |
+          echo "Docker Build"
+          sleep 2
+
+  terraform-validate:
+    runs-on: ubuntu-latest
+    needs: docker-build
+
+    steps:
+      - run: |
+          echo "Terraform Validate"
+          sleep 2
+
+  terraform-plan:
+    runs-on: ubuntu-latest
+    needs: terraform-validate
+
+    steps:
+      - run: |
+          echo "Terraform Plan"
+          sleep 2
