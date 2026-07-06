@@ -3,7 +3,7 @@ name: PR Validation - Test
 on:
   pull_request:
     branches:
-      - test
+      - test-branch
 
 jobs:
 
