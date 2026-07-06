@@ -57,4 +57,4 @@ jobs:
       - name: Validate Terraform
         run: |
           echo "Running Terraform Validate..."
-          sleep 2x`x`
+          sleep 2
