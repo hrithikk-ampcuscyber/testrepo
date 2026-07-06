@@ -3,7 +3,7 @@ name: PR Validation - Production
 on:
   pull_request:
     branches:
-      - main
+      - prod-branch
 
 jobs:
 
