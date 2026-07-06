@@ -3,7 +3,7 @@ name: PR Validation - Demo
 on:
   pull_request:
     branches:
-      - demo
+      - demo-branch
 
 jobs:
 
